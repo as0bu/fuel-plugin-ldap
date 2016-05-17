@@ -5,6 +5,7 @@ define plugin_ldap::keystone (
   $use_tls                = undef,
   $ca_chain               = undef,
   $suffix                 = undef,
+  $anonymous              = undef,
   $user                   = undef,
   $password               = undef,
   $query_scope            = undef,
@@ -62,14 +63,19 @@ define plugin_ldap::keystone (
     provider => 'ini_setting_domain',
   }
 
+  if !$anonymous {
+    keystone_config {
+      "${domain}/ldap/user":     value => $user;
+      "${domain}/ldap/password": value => $password;
+    }
+  }
+
   keystone_config {
     "${domain}/identity/driver":             value => $identity_driver;
     "${domain}/ldap/url":                    value => $url;
     "${domain}/ldap/use_tls":                value => $use_tls;
     "${domain}/ldap/tls_cacertdir":          value => $tls_cacertdir;
     "${domain}/ldap/suffix":                 value => $suffix;
-    "${domain}/ldap/user":                   value => $user;
-    "${domain}/ldap/password":               value => $password;
     "${domain}/ldap/query_scope":            value => $query_scope;
     "${domain}/ldap/user_tree_dn":           value => $user_tree_dn;
     "${domain}/ldap/user_filter":            value => $user_filter;

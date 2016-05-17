@@ -14,6 +14,7 @@ class plugin_ldap::controller {
   $identity_driver        = 'keystone.identity.backends.ldap.Identity'
   $ldap_url               = $::fuel_settings['ldap']['url']
   $suffix                 = $::fuel_settings['ldap']['suffix']
+  $anonymous              = $::fuel_settings['ldap']['anonymous']
   $user                   = $::fuel_settings['ldap']['user']
   $password               = $::fuel_settings['ldap']['password']
   $query_scope            = $::fuel_settings['ldap']['query_scope']
@@ -114,6 +115,7 @@ class plugin_ldap::controller {
     use_tls                => $tls,
     ca_chain               => $ca_chain,
     suffix                 => $suffix,
+    anonymous              => $anonymous,
     user                   => $user,
     password               => $password,
     query_scope            => $query_scope,
