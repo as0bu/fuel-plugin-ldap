@@ -72,7 +72,7 @@ attributes:
       - condition: 'settings:ldap.anonymous.value == true'
         action: "disable"
     regex:
-      source: '^\S+$'
+      source: '^\S*$'
       error: "Password must not contain spaces."
   query_scope:
     value: 'one'
